@@ -11,10 +11,16 @@ then	OS=bloat-os
     SYSTEM=`uname -s | sed -e 's/ //g' | sed -e 's?/?-?g'`
     OS="${MACHINE}-${SYSTEM}"
     if [ -f ../scripts/gnu-os ]
-    then	OS=`../scripts/gnu-os | sed s/unknown-//`
+    then	GNUOS=`../scripts/gnu-os 2>/dev/null | sed s/unknown-//`
+		if [ "X$GNUOS" != "X" ]
+		then	OS=$GNUOS
+		fi
     fi
     if [ -f ../../scripts/gnu-os ]
-    then	OS=`../../scripts/gnu-os | sed s/unknown-//`
+    then	GNUOS=`../../scripts/gnu-os 2>/dev/null | sed s/unknown-//`
+		if [ "X$GNUOS" != "X" ]
+		then	OS=$GNUOS
+		fi
     fi
 fi
 echo $OS
